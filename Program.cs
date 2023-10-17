@@ -1,9 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.Net;
+﻿using System.Diagnostics;
 using System.Globalization;
+using System.Net;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using System.IO;
 namespace SharpFetch
 {
     class Program
@@ -15,10 +14,11 @@ namespace SharpFetch
         static string hostName = Dns.GetHostName();
         static string userName = Environment.UserName;
         static TimeSpan uptime = TimeSpan.FromMilliseconds(Environment.TickCount);
-        static string barSpace = "    ";
+        static string barSpace = "   ";
         static void Main(string[] args)
         {
             int argc = args.Count();
+            string execTerm = "";
             if (argc > 0)
             {
                 for (int i = 0; i < argc; i++)
@@ -32,7 +32,8 @@ namespace SharpFetch
                                 "  -v, --version\t\t\tShow version\n" +
                                 "  -s, --setcolor <color>\t\tSet color\n" +
                                 "  -n, --nocolor\t\t\tDisable color\n" +
-                                "  -l, --language <language>\t\tSet language\n");
+                                "  -l, --language <language>\t\tSet language\n" +
+                                "  -e, --exec <program>\t\tExec program on end show Sharpfetch\n");
                             return;
                         case "-v":
                         case "--version":
@@ -42,7 +43,7 @@ namespace SharpFetch
                         case "--setcolor":
                             if (i + 1 < argc)
                             {
-                                data.color = args[i + 1];
+                                data = new TextData(data.lang, args[i + 1]);
                             }
                             else
                             {
@@ -52,14 +53,13 @@ namespace SharpFetch
                             break;
                         case "-n":
                         case "--nocolor":
-                            data.color = "";
-                            data.unsetcolor = "";
+                            data = new TextData(data.lang, data.unsetcolor);
                             break;
                         case "-l":
                         case "--language":
                             if (i + 1 < argc)
                             {
-                                data = new TextData(args[i + 1]);
+                                data = new TextData(args[i + 1], data.color);
                             }
                             else
                             {
@@ -71,6 +71,18 @@ namespace SharpFetch
                         case "--beep":
                             Console.Beep();
                             break;
+                        case "-e":
+                        case "--exec":
+                            if (i + 1 < argc)
+                            {
+                                execTerm = args[i + 1];
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return;
+                            }
+                            break;
                     }
                 }
             }
@@ -80,7 +92,7 @@ namespace SharpFetch
             List<string> localList = new List<string>();
             //Create common headers
             localList.Add(data.color + userName + data.unsetcolor + "@" + data.color + hostName + data.unsetcolor);
-            localList.Add("------------------------");
+            localList.Add(data.color + "------------------------");
             localList.Add(data.texts[0] + osPlatform);
             localList.Add(data.texts[1] + systemArch);
             localList.Add(data.texts[2] + formatedTime);
@@ -154,6 +166,21 @@ namespace SharpFetch
                 }
             }
             Console.ForegroundColor = ConsoleColor.Gray;
+            if (execTerm.Length > 0)
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = execTerm,
+                    UseShellExecute = true,
+                    RedirectStandardOutput = false,
+                    CreateNoWindow = true
+                };
+                using (Process process = new Process { StartInfo = psi })
+                {
+                    process.Start();
+                    process.WaitForExit();
+                };
+            }
         }
         static List<string> FetchLinux()
         {
@@ -249,6 +276,7 @@ namespace SharpFetch
             Console.BackgroundColor = ConsoleColor.DarkCyan;
             Console.Write(barSpace);
             Console.BackgroundColor = ConsoleColor.Gray;
+            Console.Write(barSpace);
             Console.ResetColor();
         }
         static void Bar()
@@ -268,6 +296,7 @@ namespace SharpFetch
             Console.BackgroundColor = ConsoleColor.Cyan;
             Console.Write(barSpace);
             Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(barSpace);
             Console.ResetColor();
         }
     }

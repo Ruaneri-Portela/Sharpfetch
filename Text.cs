@@ -3,10 +3,14 @@ namespace SharpFetch
     public struct TextData
     {
         public List<string> texts;
-        public string color = "\u001b[31m";
+        public string color;
         public string unsetcolor = "\u001b[0m";
-        public TextData(string lang)
+
+        public string lang;
+        public TextData(string langEntry, string colorEntry = "\u001b[31m")
         {
+            lang = langEntry;
+            color = colorEntry;
             switch (lang)
             {
                 case "pt-BR":
@@ -190,9 +194,7 @@ namespace SharpFetch
                     $"{e}[{t};31m       `Y$$b.             ",
                     $"{e}[{t};31m          `\"Y$b._        ",
                     $"{e}[{t};31m              `\"\"\"     "
-};
-
-
+                    };
                     break;
             }
 
