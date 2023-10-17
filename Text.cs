@@ -16,7 +16,7 @@ namespace SharpFetch
                 case "pt-BR":
                     texts = new List<string>(){
                         color+"Versão do SO: "+unsetcolor,
-                        color+"Arquitetura: "+unsetcolor,
+                        color+"Nucleo: "+unsetcolor,
                         color+"Tempo Ativo: "+unsetcolor,
                         color+"CPU: "+unsetcolor,
                         color+"Maquina: "+unsetcolor,
@@ -27,14 +27,14 @@ namespace SharpFetch
                         color+"GPU: "+unsetcolor,
                         color+"Disco: "+unsetcolor,
                         "Total:",
-                        "Disponivel:"
+                        "Livre:"
                     };
                     break;
                 case "ja-JP":
                     texts = new List<string>()
                     {
                     color + "OS バージョン: " + unsetcolor,
-                    color + "アーキテクチャ: " + unsetcolor,
+                    color + "xxx: " + unsetcolor,
                     color + "アクティブ時間: " + unsetcolor,
                     color + "CPU: " + unsetcolor,
                     color + "マシン: " + unsetcolor,
@@ -52,7 +52,7 @@ namespace SharpFetch
                     texts = new List<string>()
                     {
                     color + "Версия ОС: " + unsetcolor,
-                    color + "Архитектура: " + unsetcolor,
+                    color + "xxx: " + unsetcolor,
                     color + "Активное время: " + unsetcolor,
                     color + "ЦП: " + unsetcolor,
                     color + "Машина: " + unsetcolor,
@@ -70,7 +70,7 @@ namespace SharpFetch
                     texts = new List<string>()
                     {
                     color + "Betriebssystemversion: " + unsetcolor,
-                    color + "Architektur: " + unsetcolor,
+                    color + "xxx: " + unsetcolor,
                     color + "Aktive Zeit: " + unsetcolor,
                     color + "CPU: " + unsetcolor,
                     color + "Maschine: " + unsetcolor,
@@ -88,7 +88,7 @@ namespace SharpFetch
                     texts = new List<string>()
                     {
                     color + "Versión del SO: " + unsetcolor,
-                    color + "Arquitectura: " + unsetcolor,
+                    color + "xxx: " + unsetcolor,
                     color + "Tiempo activo: " + unsetcolor,
                     color + "CPU: " + unsetcolor,
                     color + "Máquina: " + unsetcolor,
@@ -106,7 +106,7 @@ namespace SharpFetch
                     texts = new List<string>()
                     {
                     color + "Version du système d'exploitation : " + unsetcolor,
-                    color + "Architecture : " + unsetcolor,
+                    color + "xxx : " + unsetcolor,
                     color + "Temps actif : " + unsetcolor,
                     color + "CPU : " + unsetcolor,
                     color + "Machine : " + unsetcolor,
@@ -123,7 +123,7 @@ namespace SharpFetch
                 default:
                     texts = new List<string>(){
                         color+"OS Version: "+unsetcolor,
-                        color+"Architecture: "+unsetcolor,
+                        color+"Kernel: "+unsetcolor,
                         color+"Uptime: "+unsetcolor,
                         color+"CPU: "+unsetcolor,
                         color+"Host: "+unsetcolor,
@@ -134,7 +134,7 @@ namespace SharpFetch
                         color+"GPU: "+unsetcolor,
                         color+"Disco: "+unsetcolor,
                         "Total:",
-                        "Available:",
+                        "Free:",
                     };
                     break;
             }
@@ -194,6 +194,31 @@ namespace SharpFetch
                     $"{e}[{t};31m       `Y$$b.             ",
                     $"{e}[{t};31m          `\"Y$b._        ",
                     $"{e}[{t};31m              `\"\"\"     "
+                    };
+                    break;
+                case 2:
+                    e = "\u001b";
+                    t = 0;
+                    asciiArt = new List<string>()
+                    {
+                    $"{e}[${t};34m                    ....,,:;+ccllll    ",
+                    $"{e}[${t};34m      ...,,+:;  cllllllllllllllllll    ",
+                    $"{e}[${t};34m,cclllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34m                                       ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34mllllllllllllll  lllllllllllllllllll    ",
+                    $"{e}[${t};34m``'ccllllllllll  lllllllllllllllllll   ",
+                    $"{e}[${t};34m      ``' \\*::  :ccllllllllllllllll   ",
+                    $"{e}[${t};34m                       ````````''*::cll",
+                    $"{e}[${t};34m                                 ````  "
                     };
                     break;
             }

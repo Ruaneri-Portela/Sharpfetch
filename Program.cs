@@ -19,6 +19,7 @@ namespace SharpFetch
         {
             int argc = args.Count();
             string execTerm = "";
+            string outMsg = "";
             if (argc > 0)
             {
                 for (int i = 0; i < argc; i++)
@@ -33,7 +34,9 @@ namespace SharpFetch
                                 "  -s, --setcolor <color>\t\tSet color\n" +
                                 "  -n, --nocolor\t\t\tDisable color\n" +
                                 "  -l, --language <language>\t\tSet language\n" +
-                                "  -e, --exec <program>\t\tExec program on end show Sharpfetch\n");
+                                "  -e, --exec <program>\t\tExec program on end show Sharpfetch\n"+
+                                "  -b, --beep \t\tbeeep sound" +
+                                "  -m, --mensagem <text>\t\tWrite custrom mensagem on exit\n");
                             return;
                         case "-v":
                         case "--version":
@@ -83,6 +86,18 @@ namespace SharpFetch
                                 return;
                             }
                             break;
+                        case "-m":
+                        case "--mensagem":
+                            if (i + 1 < argc)
+                            {
+                                outMsg = args[i + 1];
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return;
+                            }
+                            break;
                     }
                 }
             }
@@ -99,14 +114,35 @@ namespace SharpFetch
             // Choice by os
             if (osPlatform.Contains("Windows"))
             {
+                // Get version and check if windows 11
+                string space = "";
+                int splashSet;
+                int ver = int.Parse(QueryReg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "CurrentBuild"));
+                if (ver > 19045)
+                {
+                    localList[2] = data.texts[0] + "Windows 11";
+                    space = "   ";
+                    splashSet = 0;
+                }
+                else
+                {
+                    localList[2] = data.texts[0] + "Windows 10";
+                    space = "";
+                    splashSet = 2;
+                }
+                // Check variant
+                string variant = QueryReg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "EditionID");
+                localList[2] += " " + variant;
+                localList[3] += " NT " + ver;
+                // Append Windows Comuns data
                 List<string> mergeList = localList.Concat(FetchWindows()).ToList();
                 int index = 0;
                 int size = mergeList.Count - 1;
                 // Import splash
-                SplashData splash = new SplashData(0);
+                SplashData splash = new SplashData(splashSet);
                 foreach (string line in splash.asciiArt)
                 {
-                    Console.Write(line + "    ");
+                    Console.Write(line + space);
                     if (size >= index)
                     {
                         Console.Write(mergeList[index]);
@@ -181,6 +217,7 @@ namespace SharpFetch
                     process.WaitForExit();
                 };
             }
+            Console.WriteLine(outMsg);
         }
         static List<string> FetchLinux()
         {
@@ -190,12 +227,16 @@ namespace SharpFetch
         static List<string> FetchWindows()
         {
             List<string> localList = new List<string>();
-            // Get CPU and SysName
-            localList.Add(data.texts[3] + QueryReg("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", "ProcessorNameString"));
-            localList.Add(data.texts[4] + QueryReg("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\BIOS", "SystemFamily"));
             // Get Packges
             string[] parts = GenericQuery("reg", "query HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\").Split("\n");
             localList.Add(data.texts[5] + (parts.Length - 1));
+            // Get CPU and SysName
+            localList.Add(data.texts[4] + QueryReg("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\BIOS", "SystemFamily"));
+            localList.Add(data.texts[3] + QueryReg("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", "ProcessorNameString"));
+            // Get GPU
+            string[] parts3 = GenericQuery("wmic", "path win32_videocontroller get caption").Split("\n");
+            parts3[1].Replace("\r\r", "");
+            localList.Add(data.texts[9] + parts3[1]);
             // Get memory
             string[] parts2 = GenericQuery("wmic", "OS get FreePhysicalMemory, TotalVisibleMemorySize").Split("\n");
             string pattern = @"\d+";
@@ -203,21 +244,18 @@ namespace SharpFetch
             List<string> memory = new List<string>();
             foreach (Match match in matches)
             {
-                double value = double.Parse(match.Value)/1028;
+                double value = double.Parse(match.Value) / 1028;
                 memory.Add(value.ToString("F2"));
             }
             localList.Add(data.texts[6] + data.texts[7] + memory[0] + " MB / " + data.texts[8] + memory[1] + " MB");
-            // Get GPU
-            string[] parts3 = GenericQuery("wmic", "path win32_videocontroller get caption").Split("\n");
-            parts3[1].Replace("\r\r", "");
-            localList.Add(data.texts[9] + parts3[1]);
             // Get disk space
-            DriveInfo drive = new DriveInfo("C");
+            string rootDriveLetter = QueryReg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "PathName");
+            DriveInfo drive = new DriveInfo(rootDriveLetter.Substring(0));
             long free = drive.AvailableFreeSpace;
             long space = drive.TotalSize;
             string freeSpaceInGB = (free / (1024 * 1024 * 1024.0)).ToString("F2");
             string spaceInGB = (space / (1024 * 1024 * 1024.0)).ToString("F2");
-            localList.Add(data.texts[10] + data.texts[11] + spaceInGB + " GB / " + data.texts[12] + freeSpaceInGB + " GB");
+            localList.Add(data.texts[10] + data.texts[12] + freeSpaceInGB + " GB / " + data.texts[11] + spaceInGB + " GB");
             return localList;
         }
         static string QueryReg(string reg, string value)
