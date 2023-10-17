@@ -25,7 +25,6 @@ namespace SharpFetch
             localList.Add(data.texts[0] + osPlatform);
             localList.Add(data.texts[1] + systemArch);
             localList.Add(data.texts[2] + formatedTime);
-            Console.WriteLine(osPlatform);
             if (osPlatform.Contains("Windows"))
             {
                 List<string> mergeList = localList.Concat(FetchWindows()).ToList();
