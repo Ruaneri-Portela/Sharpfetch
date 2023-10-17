@@ -18,19 +18,79 @@ namespace SharpFetch
         static string barSpace = "    ";
         static void Main(string[] args)
         {
+            int argc = args.Count();
+            if (argc > 0)
+            {
+                for (int i = 0; i < argc; i++)
+                {
+                    switch (args[i])
+                    {
+                        case "-h":
+                        case "--help":
+                            Console.WriteLine("Sharpfetch help\n\n" +
+                                "  -h, --help\t\t\tShow this help message\n" +
+                                "  -v, --version\t\t\tShow version\n" +
+                                "  -s, --setcolor <color>\t\tSet color\n" +
+                                "  -n, --nocolor\t\t\tDisable color\n" +
+                                "  -l, --language <language>\t\tSet language\n");
+                            return;
+                        case "-v":
+                        case "--version":
+                            Console.WriteLine("Sharpfetch version 0.0.1");
+                            return;
+                        case "-s":
+                        case "--setcolor":
+                            if (i + 1 < argc)
+                            {
+                                data.color = args[i + 1];
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return;
+                            }
+                            break;
+                        case "-n":
+                        case "--nocolor":
+                            data.color = "";
+                            data.unsetcolor = "";
+                            break;
+                        case "-l":
+                        case "--language":
+                            if (i + 1 < argc)
+                            {
+                                data = new TextData(args[i + 1]);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return;
+                            }
+                            break;
+                        case "-b":
+                        case "--beep":
+                            Console.Beep();
+                            break;
+                    }
+                }
+            }
+            //Format uptime
             string formatCharset = @"d\ \.hh\ \:mm\ \:ss";
             string formatedTime = uptime.ToString(formatCharset);
             List<string> localList = new List<string>();
+            //Create common headers
             localList.Add(data.color + userName + data.unsetcolor + "@" + data.color + hostName + data.unsetcolor);
             localList.Add("------------------------");
             localList.Add(data.texts[0] + osPlatform);
             localList.Add(data.texts[1] + systemArch);
             localList.Add(data.texts[2] + formatedTime);
+            // Choice by os
             if (osPlatform.Contains("Windows"))
             {
                 List<string> mergeList = localList.Concat(FetchWindows()).ToList();
                 int index = 0;
                 int size = mergeList.Count - 1;
+                // Import splash
                 SplashData splash = new SplashData(0);
                 foreach (string line in splash.asciiArt)
                 {
@@ -68,6 +128,7 @@ namespace SharpFetch
                 List<string> mergeList = localList.Concat(FetchLinux()).ToList();
                 int index = 0;
                 int size = mergeList.Count - 1;
+                // Import splash
                 SplashData splash = new SplashData(1);
                 foreach (string line in splash.asciiArt)
                 {
@@ -92,6 +153,7 @@ namespace SharpFetch
                     index++;
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
         static List<string> FetchLinux()
         {
@@ -127,7 +189,7 @@ namespace SharpFetch
             long space = drive.TotalSize;
             string freeSpaceInGB = (free / (1024 * 1024 * 1024.0)).ToString("F2");
             string spaceInGB = (space / (1024 * 1024 * 1024.0)).ToString("F2");
-            localList.Add(data.texts[10]+ data.texts[11] +spaceInGB+" GB / "+data.texts[12]+freeSpaceInGB+" GB");
+            localList.Add(data.texts[10] + data.texts[11] + spaceInGB + " GB / " + data.texts[12] + freeSpaceInGB + " GB");
             return localList;
         }
         static string QueryReg(string reg, string value)

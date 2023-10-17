@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Disco2\\Git\\Sharpfetch\\SharpFetch.csproj": {}
+    "D:\\Data\\Sharpfetch\\SharpFetch.csproj": {}
   },
   "projects": {
-    "Z:\\Disco2\\Git\\Sharpfetch\\SharpFetch.csproj": {
+    "D:\\Data\\Sharpfetch\\SharpFetch.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Disco2\\Git\\Sharpfetch\\SharpFetch.csproj",
+        "projectUniqueName": "D:\\Data\\Sharpfetch\\SharpFetch.csproj",
         "projectName": "SharpFetch",
-        "projectPath": "Z:\\Disco2\\Git\\Sharpfetch\\SharpFetch.csproj",
+        "projectPath": "D:\\Data\\Sharpfetch\\SharpFetch.csproj",
         "packagesPath": "C:\\Users\\Nero\\.nuget\\packages\\",
-        "outputPath": "Z:\\Disco2\\Git\\Sharpfetch\\obj\\",
+        "outputPath": "D:\\Data\\Sharpfetch\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nero\\AppData\\Roaming\\NuGet\\NuGet.Config"

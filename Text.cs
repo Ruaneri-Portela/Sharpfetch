@@ -22,8 +22,98 @@ namespace SharpFetch
                         "Disponivel:",
                         color+"GPU: "+unsetcolor,
                         color+"Disco: "+unsetcolor,
-                        "Total: ",
-                        "Disponivel:",
+                        "Total:",
+                        "Disponivel:"
+                    };
+                    break;
+                case "ja-JP":
+                    texts = new List<string>()
+                    {
+                    color + "OS バージョン: " + unsetcolor,
+                    color + "アーキテクチャ: " + unsetcolor,
+                    color + "アクティブ時間: " + unsetcolor,
+                    color + "CPU: " + unsetcolor,
+                    color + "マシン: " + unsetcolor,
+                    color + "パッケージ: " + unsetcolor,
+                    color + "メモリ: " + unsetcolor,
+                    "使用中:",
+                    "利用可能:",
+                    color + "GPU: " + unsetcolor,
+                    color + "ディスク: " + unsetcolor,
+                    "合計:",
+                    "利用可能:"
+                    };
+                    break;
+                case "ru-RU":
+                    texts = new List<string>()
+                    {
+                    color + "Версия ОС: " + unsetcolor,
+                    color + "Архитектура: " + unsetcolor,
+                    color + "Активное время: " + unsetcolor,
+                    color + "ЦП: " + unsetcolor,
+                    color + "Машина: " + unsetcolor,
+                    color + "Пакеты: " + unsetcolor,
+                    color + "Память: " + unsetcolor,
+                    "Используется:",
+                    "Доступно:",
+                    color + "Графический процессор: " + unsetcolor,
+                    color + "Диск: " + unsetcolor,
+                    "Всего:",
+                    "Доступно:"
+                    };
+                    break;
+                case "de-DE":
+                    texts = new List<string>()
+                    {
+                    color + "Betriebssystemversion: " + unsetcolor,
+                    color + "Architektur: " + unsetcolor,
+                    color + "Aktive Zeit: " + unsetcolor,
+                    color + "CPU: " + unsetcolor,
+                    color + "Maschine: " + unsetcolor,
+                    color + "Pakete: " + unsetcolor,
+                    color + "Arbeitsspeicher: " + unsetcolor,
+                    "In Verwendung:",
+                    "Verfügbar:",
+                    color + "GPU: " + unsetcolor,
+                    color + "Festplatte: " + unsetcolor,
+                    "Gesamt:",
+                    "Verfügbar:"
+                    };
+                    break;
+                case "es-ES":
+                    texts = new List<string>()
+                    {
+                    color + "Versión del SO: " + unsetcolor,
+                    color + "Arquitectura: " + unsetcolor,
+                    color + "Tiempo activo: " + unsetcolor,
+                    color + "CPU: " + unsetcolor,
+                    color + "Máquina: " + unsetcolor,
+                    color + "Paquetes: " + unsetcolor,
+                    color + "Memoria: " + unsetcolor,
+                    "Usada:",
+                    "Disponible:",
+                    color + "GPU: " + unsetcolor,
+                    color + "Disco: " + unsetcolor,
+                    "Total:",
+                    "Disponible:"
+                    };
+                    break;
+                case "fr-FR":
+                    texts = new List<string>()
+                    {
+                    color + "Version du système d'exploitation : " + unsetcolor,
+                    color + "Architecture : " + unsetcolor,
+                    color + "Temps actif : " + unsetcolor,
+                    color + "CPU : " + unsetcolor,
+                    color + "Machine : " + unsetcolor,
+                    color + "Packages : " + unsetcolor,
+                    color + "Mémoire : " + unsetcolor,
+                    "Utilisée :",
+                    "Disponible :",
+                    color + "GPU : " + unsetcolor,
+                    color + "Disque : " + unsetcolor,
+                    "Total :",
+                    "Disponible :"
                     };
                     break;
                 default:
@@ -38,6 +128,9 @@ namespace SharpFetch
                         "Used:",
                         "Avaliable:",
                         color+"GPU: "+unsetcolor,
+                        color+"Disco: "+unsetcolor,
+                        "Total:",
+                        "Available:",
                     };
                     break;
             }
