@@ -203,9 +203,10 @@ namespace SharpFetch
             List<string> memory = new List<string>();
             foreach (Match match in matches)
             {
-                memory.Add(match.Value);
+                double value = double.Parse(match.Value)/1028;
+                memory.Add(value.ToString("F2"));
             }
-            localList.Add(data.texts[6] + data.texts[7] + memory[0] + " KB / " + data.texts[8] + memory[1] + " KB");
+            localList.Add(data.texts[6] + data.texts[7] + memory[0] + " MB / " + data.texts[8] + memory[1] + " MB");
             // Get GPU
             string[] parts3 = GenericQuery("wmic", "path win32_videocontroller get caption").Split("\n");
             parts3[1].Replace("\r\r", "");
