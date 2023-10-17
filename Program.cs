@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.IO;
 namespace SharpFetch
 {
     class Program
@@ -100,12 +101,14 @@ namespace SharpFetch
         static List<string> FetchWindows()
         {
             List<string> localList = new List<string>();
+            // Get CPU and SysName
             localList.Add(data.texts[3] + QueryReg("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", "ProcessorNameString"));
             localList.Add(data.texts[4] + QueryReg("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\BIOS", "SystemFamily"));
+            // Get Packges
             string[] parts = GenericQuery("reg", "query HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\").Split("\n");
             localList.Add(data.texts[5] + (parts.Length - 1));
+            // Get memory
             string[] parts2 = GenericQuery("wmic", "OS get FreePhysicalMemory, TotalVisibleMemorySize").Split("\n");
-            string[] parts3 = GenericQuery("wmic", "path win32_videocontroller get caption").Split("\n");
             string pattern = @"\d+";
             MatchCollection matches = Regex.Matches(parts2[1], pattern);
             List<string> memory = new List<string>();
@@ -113,9 +116,18 @@ namespace SharpFetch
             {
                 memory.Add(match.Value);
             }
-            localList.Add(data.texts[6] + data.texts[7] + memory[0] + "KB / " + data.texts[8] + memory[1] + "KB");
+            localList.Add(data.texts[6] + data.texts[7] + memory[0] + " KB / " + data.texts[8] + memory[1] + " KB");
+            // Get GPU
+            string[] parts3 = GenericQuery("wmic", "path win32_videocontroller get caption").Split("\n");
             parts3[1].Replace("\r\r", "");
             localList.Add(data.texts[9] + parts3[1]);
+            // Get disk space
+            DriveInfo drive = new DriveInfo("C");
+            long free = drive.AvailableFreeSpace;
+            long space = drive.TotalSize;
+            string freeSpaceInGB = (free / (1024 * 1024 * 1024.0)).ToString("F2");
+            string spaceInGB = (space / (1024 * 1024 * 1024.0)).ToString("F2");
+            localList.Add(data.texts[10]+ data.texts[11] +spaceInGB+" GB / "+data.texts[12]+freeSpaceInGB+" GB");
             return localList;
         }
         static string QueryReg(string reg, string value)

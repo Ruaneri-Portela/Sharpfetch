@@ -21,6 +21,9 @@ namespace SharpFetch
                         "Usada:",
                         "Disponivel:",
                         color+"GPU: "+unsetcolor,
+                        color+"Disco: "+unsetcolor,
+                        "Total: ",
+                        "Disponivel:",
                     };
                     break;
                 default:
