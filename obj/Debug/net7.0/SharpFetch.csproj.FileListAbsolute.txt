@@ -1,17 +1,3 @@
-D:/Data/SharpFetch/bin/Debug/net7.0/SharpFetch.exe
-D:/Data/SharpFetch/bin/Debug/net7.0/SharpFetch.deps.json
-D:/Data/SharpFetch/bin/Debug/net7.0/SharpFetch.runtimeconfig.json
-D:/Data/SharpFetch/bin/Debug/net7.0/SharpFetch.dll
-D:/Data/SharpFetch/bin/Debug/net7.0/SharpFetch.pdb
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.GeneratedMSBuildEditorConfig.editorconfig
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.AssemblyInfoInputs.cache
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.AssemblyInfo.cs
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.csproj.CoreCompileInputs.cache
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.dll
-D:/Data/SharpFetch/obj/Debug/net7.0/refint/SharpFetch.dll
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.pdb
-D:/Data/SharpFetch/obj/Debug/net7.0/SharpFetch.genruntimeconfig.cache
-D:/Data/SharpFetch/obj/Debug/net7.0/ref/SharpFetch.dll
 /mnt/disk2/Git/Sharpfetch/bin/Debug/net7.0/SharpFetch
 /mnt/disk2/Git/Sharpfetch/bin/Debug/net7.0/SharpFetch.deps.json
 /mnt/disk2/Git/Sharpfetch/bin/Debug/net7.0/SharpFetch.runtimeconfig.json
@@ -54,3 +40,4 @@ D:\Data\Sharpfetch\obj\Debug\net7.0\refint\SharpFetch.dll
 D:\Data\Sharpfetch\obj\Debug\net7.0\SharpFetch.pdb
 D:\Data\Sharpfetch\obj\Debug\net7.0\SharpFetch.genruntimeconfig.cache
 D:\Data\Sharpfetch\obj\Debug\net7.0\ref\SharpFetch.dll
+D:\Data\Sharpfetch\obj\Debug\net7.0\SharpFetch.sourcelink.json

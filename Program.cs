@@ -15,91 +15,13 @@ namespace SharpFetch
         static string userName = Environment.UserName;
         static TimeSpan uptime = TimeSpan.FromMilliseconds(Environment.TickCount);
         static string barSpace = "   ";
+        static string execTerm = "";
+        static string outMsg = "";
         static void Main(string[] args)
         {
-            int argc = args.Count();
-            string execTerm = "";
-            string outMsg = "";
-            if (argc > 0)
+            if (Help(args) == 1)
             {
-                for (int i = 0; i < argc; i++)
-                {
-                    switch (args[i])
-                    {
-                        case "-h":
-                        case "--help":
-                            Console.WriteLine("Sharpfetch help\n\n" +
-                                "  -h, --help\t\t\tShow this help message\n" +
-                                "  -v, --version\t\t\tShow version\n" +
-                                "  -s, --setcolor <color>\t\tSet color\n" +
-                                "  -n, --nocolor\t\t\tDisable color\n" +
-                                "  -l, --language <language>\t\tSet language\n" +
-                                "  -e, --exec <program>\t\tExec program on end show Sharpfetch\n"+
-                                "  -b, --beep \t\tbeeep sound" +
-                                "  -m, --mensagem <text>\t\tWrite custrom mensagem on exit\n");
-                            return;
-                        case "-v":
-                        case "--version":
-                            Console.WriteLine("Sharpfetch version 0.0.1");
-                            return;
-                        case "-s":
-                        case "--setcolor":
-                            if (i + 1 < argc)
-                            {
-                                data = new TextData(data.lang, args[i + 1]);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
-                                return;
-                            }
-                            break;
-                        case "-n":
-                        case "--nocolor":
-                            data = new TextData(data.lang, data.unsetcolor);
-                            break;
-                        case "-l":
-                        case "--language":
-                            if (i + 1 < argc)
-                            {
-                                data = new TextData(args[i + 1], data.color);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
-                                return;
-                            }
-                            break;
-                        case "-b":
-                        case "--beep":
-                            Console.Beep();
-                            break;
-                        case "-e":
-                        case "--exec":
-                            if (i + 1 < argc)
-                            {
-                                execTerm = args[i + 1];
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
-                                return;
-                            }
-                            break;
-                        case "-m":
-                        case "--mensagem":
-                            if (i + 1 < argc)
-                            {
-                                outMsg = args[i + 1];
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
-                                return;
-                            }
-                            break;
-                    }
-                }
+                return;
             }
             //Format uptime
             string formatCharset = @"d\ \.hh\ \:mm\ \:ss";
@@ -214,7 +136,6 @@ namespace SharpFetch
                 using (Process process = new Process { StartInfo = psi })
                 {
                     process.Start();
-                    process.WaitForExit();
                 };
             }
             Console.WriteLine(outMsg);
@@ -256,6 +177,13 @@ namespace SharpFetch
             string freeSpaceInGB = (free / (1024 * 1024 * 1024.0)).ToString("F2");
             string spaceInGB = (space / (1024 * 1024 * 1024.0)).ToString("F2");
             localList.Add(data.texts[10] + data.texts[12] + freeSpaceInGB + " GB / " + data.texts[11] + spaceInGB + " GB");
+            // Get IP
+            string ip = GenericQuery("wmic", " nicconfig where \"IPEnabled  = True\" get ipaddress");
+            pattern = "\"([^\"]+)\"";
+            matches = Regex.Matches(ip, pattern);
+            string ipList = matches[0].Value;
+            ipList = ipList.Replace("\"", "");
+            localList.Add(data.texts[13] + ipList);
             return localList;
         }
         static string QueryReg(string reg, string value)
@@ -337,6 +265,92 @@ namespace SharpFetch
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(barSpace);
             Console.ResetColor();
+        }
+        static int Help(string[] args)
+        {
+            int argc = args.Count();
+            if (argc > 0)
+            {
+                for (int i = 0; i < argc; i++)
+                {
+                    switch (args[i])
+                    {
+                        case "-h":
+                        case "--help":
+                            Console.WriteLine("Sharpfetch help\n\n" +
+                                "  -h, --help\t\t\tShow this help message\n" +
+                                "  -v, --version\t\t\tShow version\n" +
+                                "  -s, --setcolor <color>\tSet color\n" +
+                                "  -n, --nocolor\t\t\tDisable color\n" +
+                                "  -l, --language <language>\tSet language\n" +
+                                "  -e, --exec <program>\t\tExec program on end show Sharpfetch\n" +
+                                "  -b, --beep \t\t\tbeeep sound\n" +
+                                "  -m, --mensagem <text>\t\tWrite custrom mensagem on exit\n");
+                            return 1;
+                        case "-v":
+                        case "--version":
+                            Console.WriteLine("Sharpfetch version 0.0.2");
+                            return 1;
+                        case "-s":
+                        case "--setcolor":
+                            if (i + 1 < argc)
+                            {
+                                data = new TextData(data.lang, args[i + 1]);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return 1;
+                            }
+                            break;
+                        case "-n":
+                        case "--nocolor":
+                            data = new TextData(data.lang, data.unsetcolor);
+                            break;
+                        case "-l":
+                        case "--language":
+                            if (i + 1 < argc)
+                            {
+                                data = new TextData(args[i + 1], data.color);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return 1;
+                            }
+                            break;
+                        case "-b":
+                        case "--beep":
+                            Console.Beep();
+                            break;
+                        case "-e":
+                        case "--exec":
+                            if (i + 1 < argc)
+                            {
+                                execTerm = args[i + 1];
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return 1;
+                            }
+                            break;
+                        case "-m":
+                        case "--mensagem":
+                            if (i + 1 < argc)
+                            {
+                                outMsg = args[i + 1];
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: Missing argument for option: " + args[i]);
+                                return 1;
+                            }
+                            break;
+                    }
+                }
+            }
+            return 0;
         }
     }
 };

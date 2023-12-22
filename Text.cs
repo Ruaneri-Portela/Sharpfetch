@@ -27,7 +27,8 @@ namespace SharpFetch
                         color+"GPU: "+unsetcolor,
                         color+"Disco: "+unsetcolor,
                         "Total:",
-                        "Livre:"
+                        "Livre:",
+                        color+"IP: "+unsetcolor
                     };
                     break;
                 case "ja-JP":
@@ -45,7 +46,8 @@ namespace SharpFetch
                     color + "GPU: " + unsetcolor,
                     color + "ディスク: " + unsetcolor,
                     "合計:",
-                    "利用可能:"
+                    "利用可能:",
+                    color+"IP: "+unsetcolor
                     };
                     break;
                 case "ru-RU":
@@ -63,7 +65,8 @@ namespace SharpFetch
                     color + "Графический процессор: " + unsetcolor,
                     color + "Диск: " + unsetcolor,
                     "Всего:",
-                    "Доступно:"
+                    "Доступно:",
+                    color+"IP: "+unsetcolor
                     };
                     break;
                 case "de-DE":
@@ -81,7 +84,8 @@ namespace SharpFetch
                     color + "GPU: " + unsetcolor,
                     color + "Festplatte: " + unsetcolor,
                     "Gesamt:",
-                    "Verfügbar:"
+                    "Verfügbar:",
+                    color+"IP: "+unsetcolor
                     };
                     break;
                 case "es-ES":
@@ -99,7 +103,8 @@ namespace SharpFetch
                     color + "GPU: " + unsetcolor,
                     color + "Disco: " + unsetcolor,
                     "Total:",
-                    "Disponible:"
+                    "Disponible:",
+                    color+"IP: "+unsetcolor
                     };
                     break;
                 case "fr-FR":
@@ -117,7 +122,8 @@ namespace SharpFetch
                     color + "GPU : " + unsetcolor,
                     color + "Disque : " + unsetcolor,
                     "Total :",
-                    "Disponible :"
+                    "Disponible :",
+                    color+"IP: "+unsetcolor
                     };
                     break;
                 default:
@@ -135,6 +141,7 @@ namespace SharpFetch
                         color+"Disco: "+unsetcolor,
                         "Total:",
                         "Free:",
+                        color+"IP: "+unsetcolor
                     };
                     break;
             }

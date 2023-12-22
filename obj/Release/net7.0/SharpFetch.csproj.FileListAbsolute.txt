@@ -12,3 +12,4 @@ D:\Data\Sharpfetch\obj\Release\net7.0\refint\SharpFetch.dll
 D:\Data\Sharpfetch\obj\Release\net7.0\SharpFetch.pdb
 D:\Data\Sharpfetch\obj\Release\net7.0\SharpFetch.genruntimeconfig.cache
 D:\Data\Sharpfetch\obj\Release\net7.0\ref\SharpFetch.dll
+D:\Data\Sharpfetch\obj\Release\net7.0\SharpFetch.sourcelink.json

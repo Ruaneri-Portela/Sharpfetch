@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SharpFetch")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88237398442ebe08f595f442a0140b6c59740c9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SharpFetch")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SharpFetch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
