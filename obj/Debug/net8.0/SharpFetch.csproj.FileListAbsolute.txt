@@ -1,0 +1,15 @@
+D:\Data\Sharpfetch\bin\Debug\net8.0\SharpFetch.exe
+D:\Data\Sharpfetch\bin\Debug\net8.0\SharpFetch.deps.json
+D:\Data\Sharpfetch\bin\Debug\net8.0\SharpFetch.runtimeconfig.json
+D:\Data\Sharpfetch\bin\Debug\net8.0\SharpFetch.dll
+D:\Data\Sharpfetch\bin\Debug\net8.0\SharpFetch.pdb
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.GeneratedMSBuildEditorConfig.editorconfig
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.AssemblyInfoInputs.cache
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.AssemblyInfo.cs
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.csproj.CoreCompileInputs.cache
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.sourcelink.json
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.dll
+D:\Data\Sharpfetch\obj\Debug\net8.0\refint\SharpFetch.dll
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.pdb
+D:\Data\Sharpfetch\obj\Debug\net8.0\SharpFetch.genruntimeconfig.cache
+D:\Data\Sharpfetch\obj\Debug\net8.0\ref\SharpFetch.dll
